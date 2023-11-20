@@ -1,4 +1,4 @@
-# LI-6800
+# ESSM_plotting
 Author: Stanislaus J. Schymanski*
 
 Luxembourg Institute of Science and Technology, Environmental Research and Innovation Department
