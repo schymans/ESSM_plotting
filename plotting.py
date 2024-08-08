@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
-from sympy import latex
-from sympy import N
+from sympy import latex, N
+from sympy.physics.units import convert_to
 from numpy import arange
 from essm.variables.units import derive_unit, SI, Quantity
 from essm.variables.utils import markdown
@@ -65,40 +65,42 @@ def plot_expr2(xvar_min_max, yldata, yllabel=None, yrdata=None,
     
     **Examples:**
     
-    from essm.variables import Variable
-    from essm.variables.physics.thermodynamics import T_a, nu_a
-    from essm.equations.physics.thermodynamics import eq_nua, eq_ka
-    vdict = Variable.__defaults__.copy()    
-    expr = eq_nua.subs(vdict)
-    exprr = eq_ka.subs(vdict)
-    xvar = T_a
-    yldata = [(expr.rhs, 'full'), (expr.rhs/2, 'half')]
-    yrdata = exprr
-    # Simplest plot of 1 function
-    fig =  plot_expr2((T_a, 273, 373), expr)
-    # When plotting 2 functions, need to define label
-    fig = plot_expr2((T_a, 273, 373), yldata, yllabel = (nu_a))
-    # Plot of two functions on left and one on right axis
-    fig = plot_expr2((T_a, 273, 373), yldata, yllabel = (nu_a), yrdata=yrdata)
-    # Same as above, but plotting the inverse on the right
-    fig = plot_expr2((T_a, 273, 373), yldata, yllabel = (nu_a), 
-           yrdata=[Eq(1/exprr.lhs, 1/exprr.rhs)],
-           loc_legend_right='lower right')
-    # Using custom units
-    vdict = Variable.__defaults__.copy()
-    # Add units to vdict
-    vdict = fun_dict_standardunits(vdict)
-    vdict[T_a] = 300*kelvin
-    expr = eq_Cwa.subs(vdict)
-    fig = plot_expr2((P_wa, 0.01, 1), expr)
-    fig = plot_expr2((P_wa, 0.01, 1), expr, ylunit= mole/inch**3)
-    fig = plot_expr2((P_wa, 0.01, 1), yldata=expr, yrdata=expr, 
-                     xunit=bar, ylunit= mole/meter**3, yrunit=mole/inch**3,
-                     linestylesr=['--'])
-	# Modifying fig and ax attributes
-	fig.set_dpi(100)
-	fig.axes[0].set_ylim(ymin=0)
-	fig.axes[0].grid()
+    >>> from sympy import Eq
+    >>> from sympy.physics.units import bar, inch, kelvin, meter, mole
+    >>> from essm.variables import Variable
+    >>> from essm.variables.physics.thermodynamics import P_wa, T_a, nu_a
+    >>> from essm.equations.physics.thermodynamics import eq_Cwa, eq_nua, eq_ka
+    >>> vdict = Variable.__defaults__.copy()    
+    >>> expr = eq_nua.subs(vdict)
+    >>> exprr = eq_ka.subs(vdict)
+    >>> xvar = T_a
+    >>> yldata = [(expr.rhs, 'full'), (expr.rhs/2, 'half')]
+    >>> yrdata = exprr
+    >>> # Simplest plot of 1 function
+    >>> fig =  plot_expr2((T_a, 273, 373), expr)
+    >>> # When plotting 2 functions, need to define label
+    >>> fig = plot_expr2((T_a, 273, 373), yldata, yllabel = (nu_a))
+    >>> # Plot of two functions on left and one on right axis
+    >>> fig = plot_expr2((T_a, 273, 373), yldata, yllabel = (nu_a), yrdata=yrdata)
+    >>> # Same as above, but plotting the inverse on the right
+    >>> fig = plot_expr2((T_a, 273, 373), yldata, yllabel = (nu_a),\
+       yrdata=[Eq(1/exprr.lhs, 1/exprr.rhs)],\
+       loc_legend_right='lower right')
+    >>> # Using custom units
+    >>> vdict = Variable.__defaults__.copy()
+    >>> # Add units to vdict
+    >>> vdict = fun_dict_standardunits(vdict)
+    >>> vdict[T_a] = 300*kelvin
+    >>> expr = eq_Cwa.subs(vdict)
+    >>> fig = plot_expr2((P_wa, 0.01, 1), expr)
+    >>> fig = plot_expr2((P_wa, 0.01, 1), expr, ylunit= mole/inch**3)
+    >>> fig = plot_expr2((P_wa, 0.01, 1), yldata=expr, yrdata=expr,\
+                 xunit=bar, ylunit= mole/meter**3, yrunit=mole/inch**3,\
+                 linestylesr=['--'])
+	>>> # Modifying fig and ax attributes
+	>>> fig.set_dpi(100)
+	>>> ylim = fig.axes[0].set_ylim(ymin=0)
+	>>> fig.axes[0].grid()
     '''
     def get_unit(expr):
         """Return unit of expression"""
@@ -357,4 +359,7 @@ def plot_expr2(xvar_min_max, yldata, yllabel=None, yrdata=None,
     fig.tight_layout()  # otherwise the right y-label is slightly clipped
     return fig
 
+if __name__ == "__main__":
+    import doctest
+    doctest.testmod()
 
