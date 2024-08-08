@@ -83,9 +83,9 @@ def plot_expr2(xvar_min_max, yldata, yllabel=None, yrdata=None,
     >>> # Plot of two functions on left and one on right axis
     >>> fig = plot_expr2((T_a, 273, 373), yldata, yllabel = (nu_a), yrdata=yrdata)
     >>> # Same as above, but plotting the inverse on the right
-    >>> fig = plot_expr2((T_a, 273, 373), yldata, yllabel = (nu_a),\
-       yrdata=[Eq(1/exprr.lhs, 1/exprr.rhs)],\
-       loc_legend_right='lower right')
+    >>> fig = plot_expr2((T_a, 273, 373), yldata, yllabel = (nu_a),
+    ...   yrdata=[Eq(1/exprr.lhs, 1/exprr.rhs)],
+    ...   loc_legend_right='lower right')
     >>> # Using custom units
     >>> vdict = Variable.__defaults__.copy()
     >>> # Add units to vdict
@@ -94,13 +94,13 @@ def plot_expr2(xvar_min_max, yldata, yllabel=None, yrdata=None,
     >>> expr = eq_Cwa.subs(vdict)
     >>> fig = plot_expr2((P_wa, 0.01, 1), expr)
     >>> fig = plot_expr2((P_wa, 0.01, 1), expr, ylunit= mole/inch**3)
-    >>> fig = plot_expr2((P_wa, 0.01, 1), yldata=expr, yrdata=expr,\
-                 xunit=bar, ylunit= mole/meter**3, yrunit=mole/inch**3,\
-                 linestylesr=['--'])
-	>>> # Modifying fig and ax attributes
-	>>> fig.set_dpi(100)
-	>>> ylim = fig.axes[0].set_ylim(ymin=0)
-	>>> fig.axes[0].grid()
+    >>> fig = plot_expr2((P_wa, 0.01, 1), yldata=expr, yrdata=expr,
+    ...     xunit=bar, ylunit= mole/meter**3, yrunit=mole/inch**3,
+    ...     linestylesr=['--'])
+    >>> # Modifying fig and ax attributes
+    >>> fig.set_dpi(100)
+    >>> ylim = fig.axes[0].set_ylim(ymin=0)
+    >>> fig.axes[0].grid()
     '''
     def get_unit(expr):
         """Return unit of expression"""
