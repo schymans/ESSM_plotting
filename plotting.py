@@ -327,9 +327,9 @@ def plot_expr2(xvar_min_max, yldata, yllabel=None, yrdata=None,
                 if hasattr(yrdata[0], 'lhs'):
                     yrlabel = yrdata[0].lhs
 
-        if type(yrlabel) is not str: 
-            yrlabel = '$'+latex(yrlabel)+'$'+ ' (' 
-                + markdown(derive_unit(yrlabel)) + ')'       
+        if type(yrlabel) is not str:
+            yrlabel = '${0}$ ({1})'.format(latex(yrlabel),
+                markdown(derive_unit(yrlabel)))  
         ax2.tick_params(axis='y', labelcolor=color)
         if yrmin:    ax2.set_ylim(ymin=float(yrmin))
         if yrmax:    ax2.set_ylim(ymax=float(yrmax))
