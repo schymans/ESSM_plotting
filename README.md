@@ -12,7 +12,9 @@ The code in this [repository](https://github.com/schymans/ESSM_plotting) is dist
 ## General purpose
 This repository contains python scripts to plot symbolic expressions generated using the Python package [ESSM](https://essm.readthedocs.io). 
 
-To use the functions in the file `plotting.py` within a Jupyter notebook, clone this repo as a sub-repo into the one where your jupyter notbook resides, then provide the relative path to the repo (e.g. `../ESSM_plotting/` and import the desired function
+To use the functions in the file `plotting.py` within a Jupyter notebook, clone this repo as a submodule into the one where your jupyter notbook resides 
+(e.g. `git submodule add https://github.com/schymans/ESSM_plotting.git ESSM_plotting`), 
+then provide the relative path to the repo (e.g. `../ESSM_plotting/` and import the desired function:
 ```
 import imp
 path_plotting = '../ESSM_plotting/plotting.py`
