@@ -26,14 +26,12 @@ plot_expr2 = getattr(mod, 'plot_expr2')
 
 If you would like to import the functions e.g. into a project residing in [renkulab.io](https://renkulab.io/), execute in the parent folder of your renkulab project:
 ```
-renku --no-external-storage dataset add --create ESSM_plotting \
-git@github.com:schymans/ESSM_plotting.git
-```
-This will save the contents in `data/ESSM_plotting`. 
+mkdir modules
+renku dataset create --datadir modules/ESSM_plotting ESSM_plotting
+renku --no-external-storage dataset add ESSM_plotting --source '*' git@github.com:schymans/ESSM_plotting.git
 
-If you would like to have it e.g. just in the base folder, simply move it using renku:
 ```
-renku mv data/ESSM_plotting/ ESSM_plotting/
-```
+This will save the contents in `modules/ESSM_plotting`. 
+
 
 
