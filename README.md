@@ -15,7 +15,7 @@ This repository contains python scripts to plot symbolic expressions generated u
 To use the functions in the file `plotting.py` within a Jupyter notebook, clone this repo as a sub-repo into the one where your jupyter notbook resides, then provide the relative path to the repo (e.g. `../ESSM_plotting/` and import the desired function
 ```
 import imp
-path_plotting = '../ESSM_plotting/`
+path_plotting = '../ESSM_plotting/plotting.py`
 
 # Importing plotting function
 mod = imp.load_source('plotting', path_plotting)
