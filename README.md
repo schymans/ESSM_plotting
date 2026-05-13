@@ -12,9 +12,13 @@ The code in this [repository](https://github.com/schymans/ESSM_plotting) is dist
 ## General purpose
 This repository contains python scripts to plot symbolic expressions generated using the Python package [ESSM](https://essm.readthedocs.io). 
 
-To use the functions in the file `plotting.py` within a Jupyter notebook, clone this repo as a submodule into the one where your jupyter notbook resides 
-(e.g. `git submodule add https://github.com/schymans/ESSM_plotting.git ESSM_plotting`), 
-then provide the relative path to the repo (e.g. `../ESSM_plotting/` and import the desired function:
+To use the functions in the file `plotting.py` within a Jupyter notebook, clone this repo as a submodule into the one where your jupyter notbook resides, e.g.:
+```
+mkdir submodules
+cd submodules
+git submodule add https://github.com/schymans/ESSM_plotting.git ESSM_plotting
+```
+Then provide the relative path to the repo (e.g. `../ESSM_plotting/` and import the desired function:
 ```
 import imp
 path_plotting = '../ESSM_plotting/plotting.py`
@@ -23,15 +27,17 @@ path_plotting = '../ESSM_plotting/plotting.py`
 mod = imp.load_source('plotting', path_plotting)
 plot_expr2 = getattr(mod, 'plot_expr2')
 ```
-
-If you would like to import the functions e.g. into a project residing in [renkulab.io](https://renkulab.io/), execute in the parent folder of your renkulab project:
+If you or someone else creates a fresh clone
+of your repo, the submodules can be pulled in with the following command run in the base folder:
 ```
-mkdir modules
-renku dataset create --datadir modules/ESSM_plotting ESSM_plotting
-renku --no-external-storage dataset add ESSM_plotting --source '*' git@github.com:schymans/ESSM_plotting.git
-
+git submodule init
+git submodule update
 ```
-This will save the contents in `modules/ESSM_plotting`. 
+At any stage, you can update all submodules in your repo with a single command:
+```
+git submodule update --remote --merge
+```
+
 
 
 
