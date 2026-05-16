@@ -27,6 +27,18 @@ path_plotting = '../ESSM_plotting/plotting.py`
 mod = imp.load_source('plotting', path_plotting)
 plot_expr2 = getattr(mod, 'plot_expr2')
 ```
+
+UPDATE: In newer versions of Pyhton the imp module has been deprecated, in this case, use the following code instead:
+```
+from importlib.machinery import SourceFileLoader
+module_name = 'plotting'
+module_path = main_path + path_scripts + '/ESSM_plotting/plotting.py'
+
+# Importing plotting function
+mod = SourceFileLoader(module_name, module_path).load_module()
+plot_expr2 = getattr(mod, 'plot_expr2')
+```
+
 If you or someone else creates a fresh clone
 of your repo, the submodules can be pulled in with the following command run in the base folder:
 ```
